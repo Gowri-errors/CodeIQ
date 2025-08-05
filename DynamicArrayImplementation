@@ -1,0 +1,143 @@
+package com.java;
+
+import java.util.Scanner;
+
+class ListofArray{
+	private static final int initialCapacity=4;
+	private int arr[];
+	private int size;
+	private int capacity;
+	ListofArray(){
+		size= 0;
+		arr =new int[initialCapacity];
+		capacity =initialCapacity;	
+	}
+	public void add(int val) {
+		if(size==capacity)
+			expandArray();	
+		arr[size++]= val;
+	}
+	private void expandArray(){
+		capacity *=2;
+		arr=java.util.Arrays.copyOf(arr,capacity);
+	}
+	public void display() {
+		for(int i=0; i<size; i++)
+			System.out.print(arr[i]+" ");
+	}
+	public void insertAtPos(int pos, int val) {
+		if(size==capacity)
+			expandArray();
+		for(int i=size -1 ; i>pos; i--){
+			arr[i+1]=arr[i];	
+		}
+		arr[pos]=val;
+		size++;	
+	}
+	public void deleteAtPos(int pos) {
+		
+		for(int i=pos+1; i<size ; i++)
+			arr[i-1]= arr[i];
+		size--;
+		if(capacity>initialCapacity && capacity >3*size)
+			shrinkArray();		
+	}
+	private void shrinkArray() {
+		capacity /=2;
+		arr= java.util.Arrays.copyOf(arr, capacity);
+	}
+	public int length() {
+		return size;
+	}
+	public void deleteAtEnd(int pos) {
+		
+		 size--;	
+	}
+	public void deleteAtBegaining(int pos) {
+		pos= 0;
+		for(int i=pos+1; i<size ; i++)
+			arr[i-1]= arr[i];
+		size--;
+	}
+	public void insertAtbegin(int pos,int val) {
+		if(size==capacity)
+			expandArray();
+		for(int i=size -1 ; i>pos; i--){
+			arr[i+1]=arr[i];	
+		}
+		arr[pos]=val;
+		size++;
+		
+	}
+}
+public class DynamicArray {
+
+	public static void main(String[] args) {
+		ListofArray li=new ListofArray();
+		Scanner scan=new Scanner(System.in);
+		int val,pos;
+		while(true) {
+		System.out.println("\n...........List Menu.......\n");
+		System.out.println("1.Insert At End\n");
+		System.out.println("2:Display The List\n");
+		System.out.println("3:Insert The Specified Position\n");
+		System.out.println("4.Delet From Specified Position\n");
+		System.out.println("5.DeleteAt End \n");
+		System.out.println("6. Exit\n");
+		
+		System.out.println("\n......................\n");
+		System.out.println("Enter your choice \t");
+		int choice=scan.nextInt();
+		
+		switch (choice) {
+		case 1:System.out.println("Enter the Data: ");
+		val=scan.nextInt();
+		li.add(val);
+		break;
+		case 2 : li.display();
+		
+		break;
+		case 3:System.out.print("Enter the position(Starts At 0 ):");
+		pos  =scan.nextInt();
+		if(pos<0) {
+			System.out.println("invalid Position");
+			break;
+		}
+		System.out.println("Enter the Data: ");
+		val=scan.nextInt();
+		li.insertAtPos(pos,val);
+		break;
+		case 4:
+			System.out.println(" 4:Enter the position(Starts At 0 ):");
+			pos  =scan.nextInt();
+			if(pos<0) {
+				System.out.println("invalid Position");
+				break;
+			}
+			li.deleteAtPos(pos);
+			break;   
+		case 5:
+			 pos=0;
+			li.deleteAtEnd(pos);
+			break;
+		case 7: 
+			pos =0; 
+			li.deleteAtBegaining(pos);
+			break;
+		case 8:
+			pos=0;
+			val=scan.nextInt();
+			li.insertAtbegin(pos,val);
+			break;
+			
+		case 6:
+			System.exit(0);
+		 
+			default :System.out.println("invalid Choice");
+		
+		
+		}
+		}
+	}
+
+}
