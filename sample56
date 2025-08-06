@@ -1,0 +1,23 @@
+package com.java;
+
+public class SumEvenOddDigits {
+    public static void main(String[] args) {
+        int num = 23456;
+        int evenSum = 0, oddSum = 0;
+
+        while (num > 0) {
+            int d = num % 10;
+            if (d % 2 == 0) {
+                evenSum += d;
+            }
+            else {
+                oddSum += d;
+            }
+            num /= 10;
+        }
+
+        System.out.println("Even Sum: " + evenSum);
+        System.out.println("Odd Sum: " + oddSum);
+}
+}
+//finish
